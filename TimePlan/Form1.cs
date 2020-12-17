@@ -13,248 +13,250 @@ namespace TimePlan
 {
     public partial class Form1 : Form
     {
-        FileInfo day_file = new FileInfo("temp_day.txt");
-        FileInfo week_file = new FileInfo("temp_week.txt");
-        FileInfo sem_file = new FileInfo("temp_sem.txt");
-        FileInfo long_file = new FileInfo("temp_long.txt");
+        FileInfo[] save_files = { new FileInfo("temp_day.txt"), new FileInfo("temp_week.txt"),
+            new FileInfo("temp_sem.txt"), new FileInfo("temp_long.txt") };
 
-        FileInfo history_day = new FileInfo("history_day.txt");
-        FileInfo history_week = new FileInfo("history_week.txt");
-        FileInfo history_sem = new FileInfo("history_sem.txt");
+        FileInfo[] history_files = { new FileInfo("history_day.txt"), new FileInfo("history_week.txt"),
+            new FileInfo("history_sem.txt") };
 
         bool loaded = false;
+
+        Panel p_day = new Panel();
+
+        // day, week, sem, long
+        Panel[] panels = new Panel[4];
+        Label[] labels = new Label[4];
+        CheckedListBox[] checkBoxes = new CheckedListBox[4];
+        TextBox[] add_txts = new TextBox[4];
+        Button[] add_btns = new Button[4];
+        Button[] remove_btns = new Button[4];
+        Button[] end_btns = new Button[4];
+
 
         public Form1()
         {
             InitializeComponent();
-            if (day_file.Exists)
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //p_day = create_tab_panel("day");
+            //plans[0] = create_tab_panel("day");
+
+            for (int i = 0; i < 4; i++) create_tab_panel(i);
+
+            for (int i = 0; i < 4; i++)
             {
-                StreamReader streamReader = day_file.OpenText();
-                string str;
-                while ((str = streamReader.ReadLine()) != null)
+                if (save_files[i].Exists)
                 {
-                    if (str.Length > 2)
+                    StreamReader streamReader = save_files[i].OpenText();
+                    string str;
+                    while ((str = streamReader.ReadLine()) != null)
                     {
-                        checkedListDay.Items.Add(str.Substring(0, str.Length - 2), str[str.Length - 1] == '1');
-                    }                    
-                }
-                streamReader.Close();
-            }
-            
-            if (week_file.Exists)
-            {
-                StreamReader streamReader = week_file.OpenText();
-                string str;
-                while ((str = streamReader.ReadLine()) != null)
-                {
-                    if (str.Length > 2)
-                    {
-                        checkedListWeek.Items.Add(str.Substring(0, str.Length - 2), str[str.Length - 1] == '1');
+                        if (str.Length > 2)
+                        {
+                            checkBoxes[i].Items.Add(str.Substring(0, str.Length - 2), str[str.Length - 1] == '1');
+                        }
                     }
+                    streamReader.Close();
                 }
-                streamReader.Close();
-            }
-            
-            if (sem_file.Exists)
-            {
-                StreamReader streamReader = sem_file.OpenText();
-                string str;
-                while ((str = streamReader.ReadLine()) != null)
-                {
-                    if (str.Length > 2)
-                    {
-                        checkedListSem.Items.Add(str.Substring(0, str.Length - 2), str[str.Length - 1] == '1');
-                    }
-                }
-                streamReader.Close();
-            }
-            
-            if (long_file.Exists)
-            {
-                StreamReader streamReader = long_file.OpenText();
-                string str;
-                while ((str = streamReader.ReadLine()) != null)
-                {
-                    if (str.Length > 2)
-                    {
-                        checkedListLong.Items.Add(str.Substring(0, str.Length - 2), str[str.Length - 1] == '1');
-                    }
-                }
-                streamReader.Close();
             }
             loaded = true;
         }
 
+        private void create_tab_panel(int index)
+        {
+            string[] name = { "Daily", "Weekly", "Semester", "Long Term" };
+            panels[index] = new Panel
+            {
+                BackColor = Color.FromArgb(46, 51, 70),
+                Location = new Point(116, 0),
+                Margin = new Padding(4),
+                Size = new Size(772, 548),
+                Anchor = (AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right)
+            };
+
+            labels[index] = new Label
+            {
+                Text = name[index] + " Plan",
+                Font = new Font("Courier New", 16),
+                ForeColor = Color.FromArgb(0, 255, 204),
+                Location = new Point(49, 52),
+                Margin = new Padding(4),
+                Size = new Size(200, 27),
+                Anchor = (AnchorStyles.Top | AnchorStyles.Left)
+            };
+
+            checkBoxes[index] = new CheckedListBox
+            {
+                BackColor = Color.FromArgb(46, 51, 60),
+                Font = new Font("Courier New", 8),
+                ForeColor = Color.FromArgb(0, 255, 204),
+                Location = new Point(50, 120),
+                Margin = new Padding(4),
+                Size = new Size(450, 300),
+                FormattingEnabled = true,
+                HorizontalScrollbar = true,
+                BorderStyle = BorderStyle.None,
+                CheckOnClick = true,
+                Anchor = (AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right)
+            };
+            checkBoxes[index].ItemCheck += new ItemCheckEventHandler(checkedList_ItemCheck);
+
+            add_txts[index] = new TextBox
+            {
+                BackColor = Color.FromArgb(189, 255, 242),
+                BorderStyle = BorderStyle.None,
+                Font = new Font("Courier New", 10),
+                Location = new Point(530, 135),
+                Margin = new Padding(4),
+                Size = new Size(150, 22),
+                Anchor = (AnchorStyles.Top | AnchorStyles.Right)
+            };
+
+            add_btns[index] = new Button
+            {
+                Text = "Add",
+                UseVisualStyleBackColor = true,
+                Location = new Point(570, 164),
+                Margin = new Padding(4),
+                Size = new Size(75, 28),
+                Anchor = (AnchorStyles.Top | AnchorStyles.Right),
+            };
+            add_btns[index].Click += new EventHandler(add_btn_Click);
+
+            remove_btns[index] = new Button
+            {
+                Text = "Remove",
+                UseVisualStyleBackColor = true,
+                Location = new Point(570, 200),
+                Margin = new Padding(4),
+                Size = new Size(75, 28),
+                Anchor = (AnchorStyles.Top | AnchorStyles.Right)
+            };
+            remove_btns[index].Click += new EventHandler(remove_btn_Click);
+
+            end_btns[index] = new Button
+            {
+                Text = "End ",
+                UseVisualStyleBackColor = true,
+                Location = new Point(570, 236),
+                Margin = new Padding(4),
+                Size = new Size(75, 28),
+                Anchor = (AnchorStyles.Top | AnchorStyles.Right)
+            };
+            end_btns[index].Click += new EventHandler(end_btn_Click);
+
+            panels[index].Controls.Add(labels[index]);
+            panels[index].Controls.Add(checkBoxes[index]);
+            panels[index].Controls.Add(add_txts[index]);
+            panels[index].Controls.Add(add_btns[index]);
+            panels[index].Controls.Add(remove_btns[index]);
+            panels[index].Controls.Add(end_btns[index]);
+
+            Controls.Add(panels[index]);
+            Controls.SetChildIndex(panels[index], index);
+        }
+
         private void long_button_Click(object sender, EventArgs e)
         {
-            long_panel.Visible = true;
-            sem_panel.Visible = false;
-            week_panel.Visible = false;
-            day_panel.Visible = false;
+            panels[3].Visible = true;
+            panels[2].Visible = false;
+            panels[1].Visible = false;
+            panels[0].Visible = false;
         }
 
         private void sem_button_Click(object sender, EventArgs e)
         {
-            long_panel.Visible = false;
-            sem_panel.Visible = true;
-            week_panel.Visible = false;
-            day_panel.Visible = false;
+            panels[3].Visible = false;
+            panels[2].Visible = true;
+            panels[1].Visible = false;
+            panels[0].Visible = false;
         }
 
         private void week_button_Click(object sender, EventArgs e)
         {
-            long_panel.Visible = false;
-            sem_panel.Visible = false;
-            week_panel.Visible = true;
-            day_panel.Visible = false;
+            panels[3].Visible = false;
+            panels[2].Visible = false;
+            panels[1].Visible = true;
+            panels[0].Visible = false;
         }
 
         private void day_button_Click(object sender, EventArgs e)
         {
-            long_panel.Visible = false;
-            sem_panel.Visible = false;
-            week_panel.Visible = false;
-            day_panel.Visible = true;
+            panels[3].Visible = false;
+            panels[2].Visible = false;
+            panels[1].Visible = false;
+            panels[0].Visible = true;
         }
 
         private void add_btn_Click(object sender, EventArgs e)
         {
-            if (sender as Button == add_btn_long)
+            short index = 0;
+            if (sender as Button == add_btns[3]) index = 3;
+            else if (sender as Button == add_btns[2]) index = 2;
+            else if (sender as Button == add_btns[1]) index = 1;
+
+            if (add_txts[index].Text != "")
             {
-                if (add_txt_long.Text != "")
-                {
-                    checkedListLong.Items.Add(add_txt_long.Text);
-                    add_txt_long.Text = "";
-                    save('l');
-                }
-            }
-            else if (sender as Button == add_btn_sem)
-            {
-                if (add_txt_sem.Text != "")
-                {
-                    checkedListSem.Items.Add(add_txt_sem.Text);
-                    add_txt_sem.Text = "";
-                    save('s');
-                }
-            }
-            else if (sender as Button == add_btn_week)
-            {
-                if (add_txt_week.Text != "")
-                {
-                    checkedListWeek.Items.Add(add_txt_week.Text);
-                    add_txt_week.Text = "";
-                    save('w');
-                }
-            }
-            else
-            {
-                if (add_txt_day.Text != "")
-                {
-                    checkedListDay.Items.Add(add_txt_day.Text);
-                    add_txt_day.Text = "";
-                    save('d');
-                }
+                checkBoxes[index].Items.Add(add_txts[index].Text);
+                Console.WriteLine(add_txts[index].Text);
+                add_txts[index].Text = "";
+                save(index);
             }
         }
 
         private void remove_btn_Click(object sender, EventArgs e)
         {
-            if (sender as Button == remove_btn_long && checkedListLong.SelectedIndex != -1)
+            short index = 0;
+            if (sender as Button == add_btns[3]) index = 3;
+            else if (sender as Button == add_btns[2]) index = 2;
+            else if (sender as Button == add_btns[1]) index = 1;
+            if (checkBoxes[index].SelectedIndex != -1)
             {
-                checkedListLong.Items.RemoveAt(checkedListLong.SelectedIndex);
-                save('l');
-            }
-            else if (sender as Button == remove_btn_sem && checkedListSem.SelectedIndex != -1)
-            {
-                checkedListSem.Items.RemoveAt(checkedListSem.SelectedIndex);
-                save('s');
-            }
-            else if (sender as Button == remove_btn_week && checkedListWeek.SelectedIndex != -1)
-            {
-                checkedListWeek.Items.RemoveAt(checkedListWeek.SelectedIndex);
-                save('w');
-            }
-            else
-            {
-                checkedListDay.Items.RemoveAt(checkedListDay.SelectedIndex);
-                save('d');
+                checkBoxes[index].Items.RemoveAt(checkBoxes[index].SelectedIndex);
+                save(index);
             }
         }
 
-        private void save(char type)
+        private void save(short type)
         {
-            if (type == 'd')
+            string data = "";
+            for (int i = 0; i < checkBoxes[type].Items.Count; i++)
             {
-                string day_data = "";
-                for (int i = 0; i < checkedListDay.Items.Count; i++)
-                {
-                    day_data += checkedListDay.Items[i].ToString() + ':' + (checkedListDay.GetItemChecked(i) ? 1 : 0) + '\n';
-                }
-                StreamWriter streamWriter = day_file.CreateText();
-                streamWriter.WriteLine(day_data);
-                streamWriter.Close();
+                data += checkBoxes[type].Items[i].ToString() + ':' + (checkBoxes[type].GetItemChecked(i) ? 1 : 0) + '\n';
             }
-            else if (type == 'w')
-            {
-                string week_data = "";
-                for (int i = 0; i < checkedListWeek.Items.Count; i++)
-                {
-                    week_data += checkedListWeek.Items[i].ToString() + ':' + (checkedListWeek.GetItemChecked(i) ? 1 : 0) + '\n';
-                }
-                StreamWriter streamWriter = week_file.CreateText();
-                streamWriter.WriteLine(week_data);
-                streamWriter.Close();
-            }
-            else if (type == 's')
-            {
-                string sem_data = "";
-                for (int i = 0; i < checkedListSem.Items.Count; i++)
-                {
-                    sem_data += checkedListSem.Items[i].ToString() + ':' + (checkedListSem.GetItemChecked(i) ? 1 : 0) + '\n';
-                }
-                StreamWriter streamWriter = sem_file.CreateText();
-                streamWriter.WriteLine(sem_data);
-                streamWriter.Close();
-            }
-            else
-            {
-                string long_data = "";
-                for (int i = 0; i < checkedListLong.Items.Count; i++)
-                {
-                    long_data += checkedListLong.Items[i].ToString() + ':' + (checkedListLong.GetItemChecked(i) ? 1 : 0) + '\n';
-                }
-                StreamWriter streamWriter = long_file.CreateText();
-                streamWriter.WriteLine(long_data);
-                streamWriter.Close();
-            }
+            StreamWriter streamWriter = save_files[type].CreateText();
+            streamWriter.WriteLine(data);
+            streamWriter.Close();
         }
 
         private void checkedList_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             if (loaded)
             {
-                if (sender as CheckedListBox == checkedListDay)
+                if (sender as CheckedListBox == checkBoxes[0])
                 {
                     this.BeginInvoke((MethodInvoker)delegate {
-                        save('d');
+                        save(0);
                     });
                 }
-                else if (sender as CheckedListBox == checkedListWeek)
+                else if (sender as CheckedListBox == checkBoxes[1])
                 {
                     this.BeginInvoke((MethodInvoker)delegate {
-                        save('w');
+                        save(1);
                     });
                 }
-                else if (sender as CheckedListBox == checkedListSem)
+                else if (sender as CheckedListBox == checkBoxes[2])
                 {
                     this.BeginInvoke((MethodInvoker)delegate {
-                        save('s');
+                        save(2);
                     });
                 }
                 else
                 {
                     this.BeginInvoke((MethodInvoker)delegate {
-                        save('l');
+                        save(3);
                     });
                 }
             }
@@ -262,48 +264,23 @@ namespace TimePlan
 
         private void end_btn_Click(object sender, EventArgs e)
         {
-            if (sender as Button == end_btn_day)
+            short index = 0;
+            if (sender as Button == add_btns[3]) index = 3;
+            else if (sender as Button == add_btns[2]) index = 2;
+            else if (sender as Button == add_btns[1]) index = 1;
+
+            StreamWriter streamWriter = history_files[index].AppendText();
+            DateTime today = DateTime.Now;
+            streamWriter.WriteLine(today.ToString());
+            string data = "";
+            for (int i = 0; i < checkBoxes[index].Items.Count; i++)
             {
-                StreamWriter streamWriter = history_day.AppendText();
-                DateTime today = DateTime.Now;
-                streamWriter.WriteLine(today.ToString());
-                string day_data = "";
-                for (int i = 0; i < checkedListDay.Items.Count; i++)
-                {
-                    day_data += checkedListDay.Items[i].ToString() + ':' + (checkedListDay.GetItemChecked(i) ? 1 : 0) + '\n';
-                }
-                streamWriter.WriteLine(day_data);
-                streamWriter.Close();
-                checkedListDay.Items.Clear();
+                data += checkBoxes[index].Items[i].ToString() + ':' + (checkBoxes[index].GetItemChecked(i) ? 1 : 0) + '\n';
             }
-            else if (sender as Button == end_btn_week)
-            {
-                StreamWriter streamWriter = history_week.AppendText();
-                DateTime today = DateTime.Now;
-                streamWriter.WriteLine(today.ToString());
-                string week_data = "";
-                for (int i = 0; i < checkedListWeek.Items.Count; i++)
-                {
-                    week_data += checkedListWeek.Items[i].ToString() + ':' + (checkedListWeek.GetItemChecked(i) ? 1 : 0) + '\n';
-                }
-                streamWriter.WriteLine(week_data);
-                streamWriter.Close();
-                checkedListWeek.Items.Clear();
-            }
-            else
-            {
-                StreamWriter streamWriter = history_sem.AppendText();
-                DateTime today = DateTime.Now;
-                streamWriter.WriteLine(today.ToString());
-                string sem_data = "";
-                for (int i = 0; i < checkedListSem.Items.Count; i++)
-                {
-                    sem_data += checkedListSem.Items[i].ToString() + ':' + (checkedListSem.GetItemChecked(i) ? 1 : 0) + '\n';
-                }
-                streamWriter.WriteLine(sem_data);
-                streamWriter.Close();
-                checkedListSem.Items.Clear();
-            }
+            streamWriter.WriteLine(data);
+            streamWriter.Close();
+            checkBoxes[index].Items.Clear();
+            save(index);
         }
     }
 }
