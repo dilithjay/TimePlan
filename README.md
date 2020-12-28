@@ -24,6 +24,6 @@ This plan may include more long term goals that are wished to be completed befor
 ## How to Use
 - **Select Plan:** Choose the required plan from the panels on the left.
 - **Add normal task:** For each plan, type the task in the text box and click Add.
-- **Add task to week board:** Add the required day of the week in front of the text in the following format `<Day>.<Task description>`, where `<Day>` is represented by a number between 0 and 6 (inclusive) where each number represents the day of the week from Monday to Sunday.
+- **Add task to week board:** Add the required day of the week in front of the text in the following format `<Day>.<Task description>`, where `<Day>` is represented by a number between 0 and 6 (inclusive) where each number represents a day of the week from Monday to Sunday.
 - **Remove task:** Select an task from the list and click Remove. Removing from the Weekly Plan will also remove the task from the Week Board.
 - **End period:** Click End to empty the list of tasks to make way for new tasks belonging to a new period.
