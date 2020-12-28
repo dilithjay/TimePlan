@@ -15,7 +15,7 @@ All the daily tasks scheduled for the week would be displayed here. The tasks ca
 ### Daily Plan
 This is where all the every day tasks should be posted. This may include urgent activities like assignments, preparation for quizes or even leisure activities like watching movies, TV shows, etc.
 ### Weekly Plan
-The current implementation is set up such that the daily plan and the weekly plan keeps track of 2 entirely seperate lists. While the weekly plan is usable as it is to include less urgent tasks like preparation for exams, etc. The user can add tasks to the week board by specifying which day of the week the task belongs to. Check the [**How to Use**](how-to-use) section for more information.
+The current implementation is set up such that the daily plan and the weekly plan keeps track of 2 entirely seperate lists. While the weekly plan is usable as it is to include less urgent tasks like preparation for exams, etc. The user can add tasks to the week board by specifying which day of the week the task belongs to. Check the [**How to Use**](#how-to-use) section for more information.
 ### Semester Plan
 This consists of tasks that the user wishes to complete before the end of the semester. This may include tasks such as finding a topic for a research paper, writing a research paper, complete a personal project, contribute to a certain open source project, etc.
 ### Long Term Plan
