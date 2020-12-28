@@ -21,10 +21,10 @@ namespace TimePlan
 
         bool loaded = false;
 
-        Panel p_day = new Panel();
+        string[] days = { "Mon", "Tues", "Wed", "Thur", "Fri", "Sat", "Sun" };
 
-        // day, week, sem, long
-        Panel[] panels = new Panel[4];
+        // day, week, sem, long, week_board
+        Panel[] panels = new Panel[5];
         Label[] labels = new Label[4];
         CheckedListBox[] checkBoxes = new CheckedListBox[4];
         TextBox[] add_txts = new TextBox[4];
@@ -32,6 +32,8 @@ namespace TimePlan
         Button[] remove_btns = new Button[4];
         Button[] end_btns = new Button[4];
 
+        // week board
+        CheckedListBox[] wb_clbs = new CheckedListBox[7];
 
         public Form1()
         {
@@ -40,11 +42,11 @@ namespace TimePlan
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //p_day = create_tab_panel("day");
-            //plans[0] = create_tab_panel("day");
-
+            // Create the panels
             for (int i = 0; i < 4; i++) create_tab_panel(i);
+            create_week_board();
 
+            // Load data from save files
             for (int i = 0; i < 4; i++)
             {
                 if (save_files[i].Exists)
@@ -56,6 +58,17 @@ namespace TimePlan
                         if (str.Length > 2)
                         {
                             checkBoxes[i].Items.Add(str.Substring(0, str.Length - 2), str[str.Length - 1] == '1');
+
+                            // Fill week board
+                            if (i == 1)
+                            {
+                                try
+                                {
+                                    short day_num = short.Parse(str[0].ToString());
+                                    wb_clbs[day_num].Items.Add(str.Substring(0, str.Length - 2), str[str.Length - 1] == '1');
+                                }
+                                catch { }
+                            }
                         }
                     }
                     streamReader.Close();
@@ -158,36 +171,97 @@ namespace TimePlan
             Controls.SetChildIndex(panels[index], index);
         }
 
-        private void long_button_Click(object sender, EventArgs e)
+        private void create_week_board()
         {
-            panels[3].Visible = true;
-            panels[2].Visible = false;
-            panels[1].Visible = false;
-            panels[0].Visible = false;
+            panels[4] = new Panel
+            {
+                BackColor = Color.FromArgb(46, 51, 70),
+                Location = new Point(116, 0),
+                Margin = new Padding(4),
+                Size = new Size(1200, 700),
+                AutoScroll = true,
+                Anchor = (AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right)
+            };
+
+            Label[] day_labels = new Label[7];
+
+            Label wb_title = new Label
+            {
+                Text = "Week\nBoard",
+                Font = new Font("Courier New", 40),
+                ForeColor = Color.FromArgb(0, 255, 204),
+                Location = new Point(50, 100),
+                Margin = new Padding(4),
+                Size = new Size(200, 27),
+                BackColor = Color.Transparent,
+                AutoSize = true,
+                Anchor = (AnchorStyles.Top | AnchorStyles.Left)
+            };
+
+            for (int i = 0; i < 7; i++)
+            {
+                int j = i + 1, k = 60;
+                if (i >= 3)
+                {
+                    j = i - 3;
+                    k = 290;
+                }
+                wb_clbs[i] = new CheckedListBox
+                {
+                    BackColor = Color.FromArgb(46, 51, 60),
+                    Font = new Font("Courier New", 8),
+                    ForeColor = Color.FromArgb(0, 255, 204),
+                    Location = new Point(50 + 200*j, k),
+                    Margin = new Padding(4),
+                    Size = new Size(200, 200),
+                    FormattingEnabled = true,
+                    HorizontalScrollbar = true,
+                    //BorderStyle = BorderStyle.None,
+                    CheckOnClick = true,
+                    Anchor = (AnchorStyles.Top | AnchorStyles.Left)
+                };
+                wb_clbs[i].ItemCheck += new ItemCheckEventHandler(checkedList_wb_ItemCheck);
+
+                day_labels[i] = new Label
+                {
+                    Text = days[i],
+                    Font = new Font("Courier New", 12),
+                    ForeColor = Color.FromArgb(0, 255, 204),
+                    Location = new Point(130 + 200 * j, k - 20),
+                    Margin = new Padding(4),
+                    Size = new Size(200, 27),
+                    BackColor = Color.Transparent,
+                    AutoSize = true,
+                    Anchor = (AnchorStyles.Top | AnchorStyles.Left)
+                };
+            }
+
+            panels[4].Controls.Add(wb_title);
+            for (int i = 0; i < 7; i++)
+            {
+                panels[4].Controls.Add(wb_clbs[i]);
+                panels[4].Controls.Add(day_labels[i]);
+                //panels[4].Controls.SetChildIndex(day_labels[i], 0);
+            }
+            
+            Controls.Add(panels[4]);
+            Controls.SetChildIndex(panels[4], 0);
         }
 
-        private void sem_button_Click(object sender, EventArgs e)
+        private void set_visible_panel(short index)
         {
-            panels[3].Visible = false;
-            panels[2].Visible = true;
-            panels[1].Visible = false;
-            panels[0].Visible = false;
+            for (int i = 0; i < 5; i++)
+                panels[i].Visible = (i == index);
         }
 
-        private void week_button_Click(object sender, EventArgs e)
+        private void panel_button_Click(object sender, EventArgs e)
         {
-            panels[3].Visible = false;
-            panels[2].Visible = false;
-            panels[1].Visible = true;
-            panels[0].Visible = false;
-        }
-
-        private void day_button_Click(object sender, EventArgs e)
-        {
-            panels[3].Visible = false;
-            panels[2].Visible = false;
-            panels[1].Visible = false;
-            panels[0].Visible = true;
+            short index = 0;
+            if (sender as Button == board_button) index = 4;
+            else if (sender as Button == long_button) index = 3;
+            else if (sender as Button == sem_button) index = 2;
+            else if (sender as Button == week_button) index = 1;
+            set_visible_panel(index);
         }
 
         private void add_btn_Click(object sender, EventArgs e)
@@ -201,19 +275,46 @@ namespace TimePlan
             {
                 checkBoxes[index].Items.Add(add_txts[index].Text);
                 Console.WriteLine(add_txts[index].Text);
-                add_txts[index].Text = "";
-                save(index);
             }
+            if (index == 1)
+            {
+                string txt = add_txts[1].Text;
+                short day = short.Parse(txt[0].ToString());
+                try
+                {
+                    wb_clbs[day].Items.Add(txt);
+                }
+                catch (Exception ex)
+                {
+                    wb_clbs[0].Items.Add(txt);
+                    Console.WriteLine(ex.Message);
+                }
+            }
+            add_txts[index].Text = "";
+            save(index);
         }
 
         private void remove_btn_Click(object sender, EventArgs e)
         {
             short index = 0;
-            if (sender as Button == add_btns[3]) index = 3;
-            else if (sender as Button == add_btns[2]) index = 2;
-            else if (sender as Button == add_btns[1]) index = 1;
+            if (sender as Button == remove_btns[3]) index = 3;
+            else if (sender as Button == remove_btns[2]) index = 2;
+            else if (sender as Button == remove_btns[1]) index = 1;
+            
+
             if (checkBoxes[index].SelectedIndex != -1)
             {
+                if (index == 1)
+                {
+                    try
+                    {
+                        string item = (string)checkBoxes[1].SelectedItem;
+                        short day_num = short.Parse(item[0].ToString());
+                        int i = get_clb_index(item, wb_clbs[day_num]);
+                        wb_clbs[day_num].Items.RemoveAt(i);
+                    }
+                    catch { }
+                }
                 checkBoxes[index].Items.RemoveAt(checkBoxes[index].SelectedIndex);
                 save(index);
             }
@@ -235,39 +336,85 @@ namespace TimePlan
         {
             if (loaded)
             {
-                if (sender as CheckedListBox == checkBoxes[0])
-                {
-                    this.BeginInvoke((MethodInvoker)delegate {
-                        save(0);
-                    });
-                }
-                else if (sender as CheckedListBox == checkBoxes[1])
-                {
-                    this.BeginInvoke((MethodInvoker)delegate {
-                        save(1);
-                    });
-                }
-                else if (sender as CheckedListBox == checkBoxes[2])
-                {
-                    this.BeginInvoke((MethodInvoker)delegate {
-                        save(2);
-                    });
-                }
-                else
-                {
-                    this.BeginInvoke((MethodInvoker)delegate {
-                        save(3);
-                    });
-                }
+                short index = 0;
+                if (sender as CheckedListBox == checkBoxes[3]) index = 3;
+                else if (sender as CheckedListBox == checkBoxes[2]) index = 2;
+                else if (sender as CheckedListBox == checkBoxes[1]) index = 1;
+
+                BeginInvoke((MethodInvoker)delegate {
+                    save(index);
+                    if (index == 1)
+                    {
+                        update_week_board();
+                    }
+                });
             }
+        }
+
+        private void checkedList_wb_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (loaded)
+            {
+                short index = 0;
+                for (short i = 1; i < 7; i++)
+                {
+                    if (sender as CheckedListBox == wb_clbs[i]) {
+                        index = i;
+                        break;
+                    }
+                }
+
+                BeginInvoke((MethodInvoker)delegate {
+                    for (int i = 0; i < checkBoxes[1].Items.Count; i++)
+                    {
+                        string item = (string)checkBoxes[1].Items[i];
+                        if (item[0].ToString() == index.ToString())
+                        {
+                            int j = get_clb_index(item, wb_clbs[index]);
+                            checkBoxes[1].SetItemChecked(i, wb_clbs[index].GetItemChecked(j));
+                        }
+                    }
+                    save(1);
+                });
+            }
+        }
+
+        private void update_week_board()
+        {
+            int i = 0;
+            foreach (string item in checkBoxes[1].Items)
+            {
+                try
+                {
+                    short day_num = short.Parse(item[0].ToString());
+                    int j = get_clb_index(item, wb_clbs[day_num]);
+                    wb_clbs[day_num].SetItemChecked(j, checkBoxes[1].GetItemChecked(i));
+                }
+                catch { }
+                i++;
+            }
+        }
+
+        private int get_clb_index(string s, CheckedListBox clb)
+        {
+            int j = 0;
+            foreach (string item in clb.Items)
+            {
+                if (item == s) return j;
+                j++;
+            }
+            return -1;
         }
 
         private void end_btn_Click(object sender, EventArgs e)
         {
             short index = 0;
-            if (sender as Button == add_btns[3]) index = 3;
-            else if (sender as Button == add_btns[2]) index = 2;
-            else if (sender as Button == add_btns[1]) index = 1;
+            if (sender as Button == end_btns[3]) index = 3;
+            else if (sender as Button == end_btns[2]) index = 2;
+            else if (sender as Button == end_btns[1]) index = 1;
+
+            // Empty week board
+            for (int i = 0; i < 7; i++) wb_clbs[i].Items.Clear();
 
             StreamWriter streamWriter = history_files[index].AppendText();
             DateTime today = DateTime.Now;
