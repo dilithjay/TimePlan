@@ -16,17 +16,19 @@
     <PublishUrl>C:\Users\ASUS\Desktop\TimePlanner1.2\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>https://github.com/dilithjay/TimePlanner/tree/master/Installer/</InstallUrl>
-    <UpdateUrl>https://github.com/dilithjay/TimePlanner/tree/master/Installer/</UpdateUrl>
-    <ApplicationRevision>3</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <InstallUrl>https://raw.githubusercontent.com/dilithjay/TimePlanner/master/Installer/</InstallUrl>
+    <UpdateUrl>https://raw.githubusercontent.com/dilithjay/TimePlanner/master/Installer/</UpdateUrl>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>1.0.0.2</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -51,10 +53,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>2DB5C3F5A01201B9834E00538FAE53F6F6FF80B6</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>9F8B5533D863E1DEA03329D4CCD0C9772F203EF9</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>TimePlan_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>TimePlan_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -105,6 +107,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="TimePlan_1_TemporaryKey.pfx" />
     <None Include="TimePlan_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
