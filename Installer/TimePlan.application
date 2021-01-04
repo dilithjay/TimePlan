@@ -3,7 +3,7 @@
   <assemblyIdentity name="TimePlan.application" version="1.0.0.2" publicKeyToken="215d88f67f063cd2" language="neutral" processorArchitecture="msil" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <description asmv2:publisher="TimePlan" asmv2:product="TimePlan" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <deployment install="true" mapFileExtensions="true">
-    <deploymentProvider codebase="https://github.com/dilithjay/TimePlanner/tree/master/Installer/TimePlan.application" />
+    <deploymentProvider codebase="https://raw.githubusercontent.com/dilithjay/TimePlanner/master/Installer/" />
   </deployment>
   <compatibleFrameworks xmlns="urn:schemas-microsoft-com:clickonce.v2">
     <framework targetVersion="4.7.2" profile="Full" supportedRuntime="4.0.30319" />

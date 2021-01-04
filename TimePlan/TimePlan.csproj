@@ -13,7 +13,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>C:\Users\ASUS\Desktop\TimePlanner1.2\</PublishUrl>
+    <PublishUrl>C:\Users\ASUS\Desktop\TimePlanner1.3\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -53,10 +53,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>9F8B5533D863E1DEA03329D4CCD0C9772F203EF9</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>81C705CA6399DD0CFA6823AB7D3A32F6E652B31B</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>TimePlan_1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>TimePlan_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -107,8 +107,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="TimePlan_1_TemporaryKey.pfx" />
-    <None Include="TimePlan_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
