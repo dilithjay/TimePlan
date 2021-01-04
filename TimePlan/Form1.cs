@@ -21,7 +21,17 @@ namespace TimePlan
 
         bool loaded = false;
 
-        string[] days = { "Mon", "Tues", "Wed", "Thur", "Fri", "Sat", "Sun" };
+        string[] days = { "Mo", "Tu", "We", "Th", "Fr", "Sa", "Su", "None" };
+        Dictionary<string, int> str_to_int = new Dictionary<string, int>
+        {
+            ["Mo"] = 0,
+            ["Tu"] = 1,
+            ["We"] = 2,
+            ["Th"] = 3,
+            ["Fr"] = 4,
+            ["Sa"] = 5,
+            ["Su"] = 6
+        };
 
         // day, week, sem, long, week_board
         Panel[] panels = new Panel[5];
@@ -31,6 +41,7 @@ namespace TimePlan
         Button[] add_btns = new Button[4];
         Button[] remove_btns = new Button[4];
         Button[] end_btns = new Button[4];
+        RadioButton[] week_rb = new RadioButton[8];
 
         // week board
         CheckedListBox[] wb_clbs = new CheckedListBox[7];
@@ -60,14 +71,12 @@ namespace TimePlan
                             checkBoxes[i].Items.Add(str.Substring(0, str.Length - 2), str[str.Length - 1] == '1');
 
                             // Fill week board
-                            if (i == 1)
+                            if (i == 1 && str.Length > 3)
                             {
-                                try
+                                if (str_to_int.ContainsKey(str.Substring(0, 2)) && str[2] == ':')
                                 {
-                                    short day_num = short.Parse(str[0].ToString());
-                                    wb_clbs[day_num].Items.Add(str.Substring(0, str.Length - 2), str[str.Length - 1] == '1');
+                                    wb_clbs[str_to_int[str.Substring(0, 2)]].Items.Add(str.Substring(3, str.Length - 5), str[str.Length - 1] == '1');
                                 }
-                                catch { }
                             }
                         }
                     }
@@ -85,7 +94,7 @@ namespace TimePlan
                 BackColor = Color.FromArgb(46, 51, 70),
                 Location = new Point(116, 0),
                 Margin = new Padding(4),
-                Size = new Size(772, 548),
+                Size = new Size(1200, 700),
                 Anchor = (AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right)
             };
 
@@ -121,7 +130,7 @@ namespace TimePlan
                 BackColor = Color.FromArgb(189, 255, 242),
                 BorderStyle = BorderStyle.None,
                 Font = new Font("Courier New", 10),
-                Location = new Point(530, 135),
+                Location = new Point(530, 165),
                 Margin = new Padding(4),
                 Size = new Size(150, 22),
                 Anchor = (AnchorStyles.Top | AnchorStyles.Right)
@@ -131,7 +140,7 @@ namespace TimePlan
             {
                 Text = "Add",
                 UseVisualStyleBackColor = true,
-                Location = new Point(570, 164),
+                Location = new Point(570, 194),
                 Margin = new Padding(4),
                 Size = new Size(75, 28),
                 Anchor = (AnchorStyles.Top | AnchorStyles.Right),
@@ -142,7 +151,7 @@ namespace TimePlan
             {
                 Text = "Remove",
                 UseVisualStyleBackColor = true,
-                Location = new Point(570, 200),
+                Location = new Point(570, 230),
                 Margin = new Padding(4),
                 Size = new Size(75, 28),
                 Anchor = (AnchorStyles.Top | AnchorStyles.Right)
@@ -153,12 +162,29 @@ namespace TimePlan
             {
                 Text = "End ",
                 UseVisualStyleBackColor = true,
-                Location = new Point(570, 236),
+                Location = new Point(570, 266),
                 Margin = new Padding(4),
                 Size = new Size(75, 28),
                 Anchor = (AnchorStyles.Top | AnchorStyles.Right)
             };
             end_btns[index].Click += new EventHandler(end_btn_Click);
+
+            if (index == 1)
+            {
+                for (short i = 0; i < 8; i++)
+                {
+                    week_rb[i] = new RadioButton
+                    {
+                        Location = new Point(463 + (i % 4) * 40 + (i == 7 ? 1 : 0) * 14, 120 + (i > 3 ? 1 : 0) * 20),
+                        ForeColor = Color.FromArgb(0, 255, 204),
+                        Font = new Font("Courier New", 8),
+                        Text = days[i],
+                        AutoSize = true,
+                        Anchor = (AnchorStyles.Top | AnchorStyles.Right)
+                    };
+                    panels[1].Controls.Add(week_rb[i]);
+                }
+            }
 
             panels[index].Controls.Add(labels[index]);
             panels[index].Controls.Add(checkBoxes[index]);
@@ -271,24 +297,25 @@ namespace TimePlan
             else if (sender as Button == add_btns[2]) index = 2;
             else if (sender as Button == add_btns[1]) index = 1;
 
-            if (add_txts[index].Text != "")
-            {
-                checkBoxes[index].Items.Add(add_txts[index].Text);
-                Console.WriteLine(add_txts[index].Text);
-            }
+            
             if (index == 1)
             {
                 string txt = add_txts[1].Text;
-                short day = short.Parse(txt[0].ToString());
-                try
+                for (short i = 0; i < 7; i++)
                 {
-                    wb_clbs[day].Items.Add(txt);
+                    if (week_rb[i].Checked)
+                    {
+                        week_rb[i].Checked = false;
+                        wb_clbs[i].Items.Add(txt);
+                        txt = week_rb[i].Text + ':' + txt;
+                        break;
+                    }
                 }
-                catch (Exception ex)
-                {
-                    wb_clbs[0].Items.Add(txt);
-                    Console.WriteLine(ex.Message);
-                }
+                checkBoxes[1].Items.Add(txt);
+            }
+            else if (add_txts[index].Text != "")
+            {
+                checkBoxes[index].Items.Add(add_txts[index].Text);
             }
             add_txts[index].Text = "";
             save(index);
@@ -306,14 +333,13 @@ namespace TimePlan
             {
                 if (index == 1)
                 {
-                    try
+                    string item = (string)checkBoxes[1].SelectedItem;
+                    if (str_to_int.ContainsKey(item.Substring(0, 2)) && item[2] == ':')
                     {
-                        string item = (string)checkBoxes[1].SelectedItem;
-                        short day_num = short.Parse(item[0].ToString());
-                        int i = get_clb_index(item, wb_clbs[day_num]);
+                        int day_num = str_to_int[item.Substring(0, 2)];
+                        int i = get_clb_index(item.Substring(3, item.Length - 3), wb_clbs[day_num]);
                         wb_clbs[day_num].Items.RemoveAt(i);
                     }
-                    catch { }
                 }
                 checkBoxes[index].Items.RemoveAt(checkBoxes[index].SelectedIndex);
                 save(index);
@@ -368,9 +394,9 @@ namespace TimePlan
                     for (int i = 0; i < checkBoxes[1].Items.Count; i++)
                     {
                         string item = (string)checkBoxes[1].Items[i];
-                        if (item[0].ToString() == index.ToString())
+                        if (item.Substring(0, 2) == days[index] && item[2] == ':')
                         {
-                            int j = get_clb_index(item, wb_clbs[index]);
+                            int j = get_clb_index(item.Substring(3), wb_clbs[index]);
                             checkBoxes[1].SetItemChecked(i, wb_clbs[index].GetItemChecked(j));
                         }
                     }
@@ -386,8 +412,8 @@ namespace TimePlan
             {
                 try
                 {
-                    short day_num = short.Parse(item[0].ToString());
-                    int j = get_clb_index(item, wb_clbs[day_num]);
+                    int day_num = str_to_int[item.Substring(0, 2)];
+                    int j = get_clb_index(item.Substring(3, item.Length - 3), wb_clbs[day_num]);
                     wb_clbs[day_num].SetItemChecked(j, checkBoxes[1].GetItemChecked(i));
                 }
                 catch { }

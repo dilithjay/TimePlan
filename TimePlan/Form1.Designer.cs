@@ -65,7 +65,7 @@
             this.board_button.FlatAppearance.BorderSize = 0;
             this.board_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.board_button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(255)))), ((int)(((byte)(204)))));
-            this.board_button.Location = new System.Drawing.Point(-1, 226);
+            this.board_button.Location = new System.Drawing.Point(0, 226);
             this.board_button.Margin = new System.Windows.Forms.Padding(4);
             this.board_button.Name = "board_button";
             this.board_button.Size = new System.Drawing.Size(145, 29);
