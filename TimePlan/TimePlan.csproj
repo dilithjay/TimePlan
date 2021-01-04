@@ -52,7 +52,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>81C705CA6399DD0CFA6823AB7D3A32F6E652B31B</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>B50B3ED063A7857956912D7B07689BBDF59AC82F</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>TimePlan_TemporaryKey.pfx</ManifestKeyFile>
@@ -106,6 +106,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="TimePlan_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
