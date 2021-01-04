@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="TimePlan.exe" version="1.0.0.2" publicKeyToken="215d88f67f063cd2" language="neutral" processorArchitecture="msil" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="TimePlan" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="TimePlan.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TimePlan.exe" size="19928">
+      <assemblyIdentity name="TimePlan" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>Q6nghgC/lj+noRreFMkmsRBAOTQYPbZrYCA5LfkZeOI=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="TimePlan.exe.config" size="189">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>R+Wg8QGvQVHX8T0ta/qbhH1bXkqY0fRnS3wBV3J0bN8=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=LAPTOP-R719EIUO\ASUS" issuerKeyHash="56603ba592b128e890a02b44f6a6649fb22e6f08" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>y3CAFZ5b90VOshH04YZjPfZlrsVpkrHazX21U47R+ug=</DigestValue></Reference></SignedInfo><SignatureValue>S2IYHuQQd+jcaienix8UMwsJLrDoo/aCx1N3XIk6YJSBjfMrdtMY/QNBkPUthZ2XRyXERXzX3FSncmfzisM7j/lj9kPGz82f1okQtI/8nyD7Ke1HANek8ycfyEicaelV6wacZUjw0tTU73Jqz+EtfJdBLBpE4+phzLO/ai4qucM=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>shH9hnb6mTOT50V/fR0LITeKW3gpgO4shzIOB4ZDqjJrXul/Ul9Y7pGfTuR8NAvs4K+ooBAvAPS2en9KFUDs5gO93Fe1JdGh9LEeI/GX6IzQv4r4SjSaDEtfC4uZveYoc9p68iOouXI2f36EEao7Bicb81BVWDInb0Z5PFETWUk=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="e8fad18e53b57dcddab19269c5ae65f63d6386e1f411b24e45f75b9e158070cb" Description="" Url=""><as:assemblyIdentity name="TimePlan.exe" version="1.0.0.2" publicKeyToken="215d88f67f063cd2" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=LAPTOP-R719EIUO\ASUS</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>EZKhdzOV7jgCeSNAkZk0nXuBJ3LpK4bbF1kIx3rFdS4=</DigestValue></Reference></SignedInfo><SignatureValue>VAph8WulOzzcT9bV4y8nwW8h6jqdbKUJpr8wHsuoVuLv33ZHroulJB6g+q0H5jSWBx+aptxqbizrNM1Es8M4zzcCdc6jlkgPOeMu9ioEJ9qiRyvz/fTTWolNOs1g2K/VJ4Lcm3rz555HyYchXJinLgU7TvNo5qi2vFXvuwpd2S0=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>shH9hnb6mTOT50V/fR0LITeKW3gpgO4shzIOB4ZDqjJrXul/Ul9Y7pGfTuR8NAvs4K+ooBAvAPS2en9KFUDs5gO93Fe1JdGh9LEeI/GX6IzQv4r4SjSaDEtfC4uZveYoc9p68iOouXI2f36EEao7Bicb81BVWDInb0Z5PFETWUk=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB6TCCAVKgAwIBAgIQeTS6bwMxG55Jl/NWGA+irjANBgkqhkiG9w0BAQsFADAzMTEwLwYDVQQDHigATABBAFAAVABPAFAALQBSADcAMQA5AEUASQBVAE8AXABBAFMAVQBTMB4XDTIwMTIxNjAzMjg0NVoXDTIxMTIxNjA5Mjg0NVowMzExMC8GA1UEAx4oAEwAQQBQAFQATwBQAC0AUgA3ADEAOQBFAEkAVQBPAFwAQQBTAFUAUzCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAshH9hnb6mTOT50V/fR0LITeKW3gpgO4shzIOB4ZDqjJrXul/Ul9Y7pGfTuR8NAvs4K+ooBAvAPS2en9KFUDs5gO93Fe1JdGh9LEeI/GX6IzQv4r4SjSaDEtfC4uZveYoc9p68iOouXI2f36EEao7Bicb81BVWDInb0Z5PFETWUkCAwEAATANBgkqhkiG9w0BAQsFAAOBgQAdfvj49Mj5ufAcmwkRyAVTDbbdXZv2jUfi7uiTFaywCLKdmU8mhtG1HI0NnN4+yRq1g5xZWdAk7GgKBunjBxIDhMyBkhXvQ/zELu7LyRYG9A7q5Bs83GKEGzScUxe1dy+UbZjCPbga9y7Jn3eSaCuk6iuGpWS3avhmAFVSClBjTA==</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
