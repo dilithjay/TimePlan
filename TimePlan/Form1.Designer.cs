@@ -31,7 +31,6 @@
             this.plan_list = new System.Windows.Forms.Panel();
             this.board_button = new System.Windows.Forms.Button();
             this.long_button = new System.Windows.Forms.Button();
-            this.day_button = new System.Windows.Forms.Button();
             this.week_button = new System.Windows.Forms.Button();
             this.sem_button = new System.Windows.Forms.Button();
             this.checkedListLong = new System.Windows.Forms.CheckedListBox();
@@ -49,7 +48,6 @@
             this.plan_list.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
             this.plan_list.Controls.Add(this.board_button);
             this.plan_list.Controls.Add(this.long_button);
-            this.plan_list.Controls.Add(this.day_button);
             this.plan_list.Controls.Add(this.week_button);
             this.plan_list.Controls.Add(this.sem_button);
             this.plan_list.Dock = System.Windows.Forms.DockStyle.Left;
@@ -65,7 +63,7 @@
             this.board_button.FlatAppearance.BorderSize = 0;
             this.board_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.board_button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(255)))), ((int)(((byte)(204)))));
-            this.board_button.Location = new System.Drawing.Point(0, 226);
+            this.board_button.Location = new System.Drawing.Point(0, 189);
             this.board_button.Margin = new System.Windows.Forms.Padding(4);
             this.board_button.Name = "board_button";
             this.board_button.Size = new System.Drawing.Size(145, 29);
@@ -88,21 +86,6 @@
             this.long_button.Text = "Long Term Plan";
             this.long_button.UseVisualStyleBackColor = false;
             this.long_button.Click += new System.EventHandler(this.panel_button_Click);
-            // 
-            // day_button
-            // 
-            this.day_button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.day_button.FlatAppearance.BorderSize = 0;
-            this.day_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.day_button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(255)))), ((int)(((byte)(204)))));
-            this.day_button.Location = new System.Drawing.Point(0, 189);
-            this.day_button.Margin = new System.Windows.Forms.Padding(4);
-            this.day_button.Name = "day_button";
-            this.day_button.Size = new System.Drawing.Size(145, 29);
-            this.day_button.TabIndex = 3;
-            this.day_button.Text = "Daily Plan";
-            this.day_button.UseVisualStyleBackColor = false;
-            this.day_button.Click += new System.EventHandler(this.panel_button_Click);
             // 
             // week_button
             // 
@@ -227,7 +210,6 @@
 
         private System.Windows.Forms.Panel plan_list;
         private System.Windows.Forms.Button long_button;
-        private System.Windows.Forms.Button day_button;
         private System.Windows.Forms.Button week_button;
         private System.Windows.Forms.Button sem_button;
         private System.Windows.Forms.CheckedListBox checkedListLong;
