@@ -400,7 +400,7 @@ namespace TimePlan
             int i = 0;
             foreach (string item in checkBoxes[0].Items)
             {
-                if (str_to_int.ContainsKey(item.Substring(0, 2)) && item[2] == 'i')
+                if (str_to_int.ContainsKey(item.Substring(0, 2)) && item[2] == ':')
                 {
                     int day_num = str_to_int[item.Substring(0, 2)];
                     int j = get_clb_index(item.Substring(3, item.Length - 3), wb_clbs[day_num]);
