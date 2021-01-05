@@ -25,10 +25,12 @@
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>https://raw.githubusercontent.com/dilithjay/TimePlanner/master/Installer/</InstallUrl>
     <UpdateUrl>https://raw.githubusercontent.com/dilithjay/TimePlanner/master/Installer/</UpdateUrl>
+    <ProductName>Time Planner</ProductName>
+    <PublisherName>dilithjay</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>6</ApplicationRevision>
-    <ApplicationVersion>1.0.0.6</ApplicationVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
