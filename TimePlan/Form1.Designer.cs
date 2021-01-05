@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.plan_list = new System.Windows.Forms.Panel();
             this.board_button = new System.Windows.Forms.Button();
             this.long_button = new System.Windows.Forms.Button();
@@ -194,6 +195,7 @@
             this.ClientSize = new System.Drawing.Size(1262, 673);
             this.Controls.Add(this.long_panel);
             this.Controls.Add(this.plan_list);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
