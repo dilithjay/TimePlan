@@ -9,14 +9,14 @@ Then plan can be divided into 3 categories:
 Additionally there is another tab known as Week Board (Explained below)
 Of course, what each section is used for is entirely upto the user but the following is how I intended and how I use it.
 
-### Week Board
-All the daily tasks scheduled for the week would be displayed here. The tasks can be ticked off from this board as well.
-### Weekly Plan
-This plan can be used to schedule the tasks planned to be done within the week. Tasks can be added either for a specific day of the week or to be completed on any day within the week. Check the [**How to Use**](#how-to-use) section for more information.
-### Semester Plan
-This consists of tasks that the user wishes to complete before the end of the semester. This may include tasks such as finding a topic for a research paper, writing a research paper, complete a personal project, contribute to a certain open source project, etc.
 ### Long Term Plan
 This plan may include more long term goals that are wished to be completed before graduating or otherwise. Goals such as completing this many personal projects, writing this many research papers, obtaining a first class, etc. can be included under this plan. This is intended as more of a motivator as opposed to the other plans which were intended as deadline.
+### Semester Plan
+This consists of tasks that the user wishes to complete before the end of the semester. This may include tasks such as finding a topic for a research paper, writing a research paper, complete a personal project, contribute to a certain open source project, etc.
+### Weekly Plan
+This plan can be used to schedule the tasks planned to be done within the week. Tasks can be added either for a specific day of the week or to be completed on any day within the week. Check the [**How to Use**](#how-to-use) section for more information.
+### Week Board
+All the daily tasks scheduled for the week would be displayed here. The tasks can be ticked off from this board as well.
 
 ## How to Use
 - **Select Plan:** Choose the required plan from the panels on the left.
