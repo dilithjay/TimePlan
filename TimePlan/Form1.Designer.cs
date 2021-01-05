@@ -113,7 +113,7 @@
             this.sem_button.Name = "sem_button";
             this.sem_button.Size = new System.Drawing.Size(145, 29);
             this.sem_button.TabIndex = 1;
-            this.sem_button.Text = "Semester Plan";
+            this.sem_button.Text = "Sem Plan";
             this.sem_button.UseVisualStyleBackColor = false;
             this.sem_button.Click += new System.EventHandler(this.panel_button_Click);
             // 
