@@ -5,6 +5,7 @@ Then plan can be divided into 3 categories:
 * Long Term Plan
 * Semester Plan
 * Weekly Plan
+
 Additionally there is another tab known as Week Board (Explained below)
 Of course, what each section is used for is entirely upto the user but the following is how I intended and how I use it.
 
