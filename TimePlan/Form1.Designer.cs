@@ -144,7 +144,7 @@
             // 
             // remove_btn_long
             // 
-            this.remove_btn_long.Location = new System.Drawing.Point(565, 241);
+            this.remove_btn_long.Location = new System.Drawing.Point(565, 207);
             this.remove_btn_long.Margin = new System.Windows.Forms.Padding(4);
             this.remove_btn_long.Name = "remove_btn_long";
             this.remove_btn_long.Size = new System.Drawing.Size(94, 29);

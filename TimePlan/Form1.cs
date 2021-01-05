@@ -19,7 +19,7 @@ namespace TimePlan
         bool loaded = false;
 
         string[] days_short = { "Mo", "Tu", "We", "Th", "Fr", "Sa", "Su", "None" };
-        string[] days_long = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+        string[] days_long = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
         Dictionary<string, int> str_to_int = new Dictionary<string, int>
         {
             ["Mo"] = 0,
@@ -251,7 +251,7 @@ namespace TimePlan
                     Text = days_long[i],
                     Font = new Font("Courier New", 12),
                     ForeColor = Color.FromArgb(0, 255, 204),
-                    Location = new Point(110 + 200 * j, k - 20),
+                    Location = new Point(130 + 200 * j, k - 20),
                     Margin = new Padding(4),
                     Size = new Size(200, 27),
                     BackColor = Color.Transparent,
