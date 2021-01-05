@@ -19,7 +19,7 @@ namespace TimePlan
         bool loaded = false;
 
         string[] days_short = { "Mo", "Tu", "We", "Th", "Fr", "Sa", "Su", "None" };
-        string[] days_long = { "Mon", "Tues", "Wed", "Thu", "Fri", "Sat", "Sun" };
+        string[] days_long = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
         Dictionary<string, int> str_to_int = new Dictionary<string, int>
         {
             ["Mo"] = 0,
