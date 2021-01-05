@@ -13,7 +13,7 @@ namespace TimePlan
 {
     public partial class Form1 : Form
     {
-        FileInfo[] save_files = { new FileInfo("temp_week.txt"), new FileInfo("temp_sem.txt"), new FileInfo("temp_long.txt") };
+        // FileInfo[] save_files = { new FileInfo("temp_week.txt"), new FileInfo("temp_sem.txt"), new FileInfo("temp_long.txt") };
         FileInfo[] history_files = { new FileInfo("history_week.txt"), new FileInfo("history_sem.txt") };
 
         bool loaded = false;
@@ -58,27 +58,26 @@ namespace TimePlan
             // Load data from save files
             for (int i = 0; i < 3; i++)
             {
-                if (save_files[i].Exists)
-                {
-                    StreamReader streamReader = save_files[i].OpenText();
-                    string str;
-                    while ((str = streamReader.ReadLine()) != null)
-                    {
-                        if (str.Length > 2)
-                        {
-                            checkBoxes[i].Items.Add(str.Substring(0, str.Length - 2), str[str.Length - 1] == '1');
+                string[] strs;
+                if (i == 0) strs = Properties.Settings.Default.temp_week.Split('\n');
+                else if (i == 1) strs = Properties.Settings.Default.temp_sem.Split('\n');
+                else strs = Properties.Settings.Default.temp_long.Split('\n');
 
-                            // Fill week board
-                            if (i == 0 && str.Length > 3)
+                foreach (string str in strs)
+                {
+                    if (str.Length > 2)
+                    {
+                        checkBoxes[i].Items.Add(str.Substring(0, str.Length - 2), str[str.Length - 1] == '1');
+
+                        // Fill week board
+                        if (i == 0 && str.Length > 3)
+                        {
+                            if (str_to_int.ContainsKey(str.Substring(0, 2)) && str[2] == ':')
                             {
-                                if (str_to_int.ContainsKey(str.Substring(0, 2)) && str[2] == ':')
-                                {
-                                    wb_clbs[str_to_int[str.Substring(0, 2)]].Items.Add(str.Substring(3, str.Length - 5), str[str.Length - 1] == '1');
-                                }
+                                wb_clbs[str_to_int[str.Substring(0, 2)]].Items.Add(str.Substring(3, str.Length - 5), str[str.Length - 1] == '1');
                             }
                         }
                     }
-                    streamReader.Close();
                 }
             }
             loaded = true;
@@ -347,9 +346,10 @@ namespace TimePlan
             {
                 data += checkBoxes[type].Items[i].ToString() + ':' + (checkBoxes[type].GetItemChecked(i) ? 1 : 0) + '\n';
             }
-            StreamWriter streamWriter = save_files[type].CreateText();
-            streamWriter.WriteLine(data);
-            streamWriter.Close();
+            if (type == 0) Properties.Settings.Default.temp_week = data;
+            else if (type == 1) Properties.Settings.Default.temp_sem = data;
+            else Properties.Settings.Default.temp_long = data;
+            Properties.Settings.Default.Save();
         }
 
         private void checkedList_ItemCheck(object sender, ItemCheckEventArgs e)
