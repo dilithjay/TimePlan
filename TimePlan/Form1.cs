@@ -32,7 +32,8 @@ namespace TimePlan
         };
 
         // day, week, sem, long, week_board
-        Panel[] panels = new Panel[4];
+        static int num_panels = 5;
+        Panel[] panels = new Panel[num_panels];
         Label[] labels = new Label[3];
         CheckedListBox[] checkBoxes = new CheckedListBox[3];
         TextBox[] add_txts = new TextBox[3];
@@ -44,6 +45,9 @@ namespace TimePlan
         // week board
         CheckedListBox[] wb_clbs = new CheckedListBox[7];
 
+        // notes
+        RichTextBox notes_tb;
+
         public Form1()
         {
             InitializeComponent();
@@ -54,6 +58,7 @@ namespace TimePlan
             // Create the panels
             for (int i = 0; i < 3; i++) create_tab_panel(i);
             create_week_board();
+            create_notes_panel();
 
             // Load data from save files
             for (int i = 0; i < 3; i++)
@@ -80,6 +85,10 @@ namespace TimePlan
                     }
                 }
             }
+
+            // Fill notes text
+            notes_tb.Text = Properties.Settings.Default.notes;
+
             loaded = true;
         }
 
@@ -270,18 +279,70 @@ namespace TimePlan
             Controls.SetChildIndex(panels[3], 0);
         }
 
+        private void create_notes_panel()
+        {
+            panels[4] = new Panel
+            {
+                BackColor = Color.FromArgb(46, 51, 70),
+                Location = new Point(116, 0),
+                Margin = new Padding(4),
+                Size = new Size(1200, 700),
+                AutoScroll = true,
+                Anchor = (AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right)
+            };
+
+            Label title = new Label
+            {
+                Text = "Notes",
+                Font = new Font("Courier New", 16),
+                ForeColor = Color.FromArgb(0, 255, 204),
+                Location = new Point(49, 52),
+                Margin = new Padding(4),
+                Size = new Size(200, 27),
+                Anchor = (AnchorStyles.Top | AnchorStyles.Left)
+            };
+
+            notes_tb = new RichTextBox
+            {
+                BackColor = Color.FromArgb(46, 51, 60),
+                Font = new Font("Courier New", 8),
+                ForeColor = Color.FromArgb(0, 255, 204),
+                Location = new Point(50, 120),
+                Margin = new Padding(4),
+                Size = new Size(800, 350),
+                Multiline = true,
+                ScrollBars = RichTextBoxScrollBars.Both,
+                BorderStyle = BorderStyle.None,
+                Anchor = (AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right)
+            };
+            notes_tb.TextChanged += new EventHandler(save_notes);
+
+            panels[4].Controls.Add(title);
+            panels[4].Controls.Add(notes_tb);
+
+            Controls.Add(panels[4]);
+            Controls.SetChildIndex(panels[4], 0);
+        }
+
+        private void save_notes(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.notes = notes_tb.Text;
+            Properties.Settings.Default.Save();
+        }
+
         private void set_visible_panel(short index)
         {
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < num_panels; i++)
                 panels[i].Visible = (i == index);
         }
 
         private void panel_button_Click(object sender, EventArgs e)
         {
-            short index = 3;
-            if (sender as Button == long_button) index = 2;
+            short index = 0;
+            if (sender as Button == notes_button) index = 4;
+            else if (sender as Button == board_button) index = 3;
+            else if (sender as Button == long_button) index = 2;
             else if (sender as Button == sem_button) index = 1;
-            else if (sender as Button == week_button) index = 0;
             set_visible_panel(index);
         }
 

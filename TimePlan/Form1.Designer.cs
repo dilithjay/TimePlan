@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.plan_list = new System.Windows.Forms.Panel();
+            this.notes_button = new System.Windows.Forms.Button();
             this.board_button = new System.Windows.Forms.Button();
             this.long_button = new System.Windows.Forms.Button();
             this.week_button = new System.Windows.Forms.Button();
@@ -47,6 +48,7 @@
             // plan_list
             // 
             this.plan_list.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
+            this.plan_list.Controls.Add(this.notes_button);
             this.plan_list.Controls.Add(this.board_button);
             this.plan_list.Controls.Add(this.long_button);
             this.plan_list.Controls.Add(this.week_button);
@@ -58,13 +60,28 @@
             this.plan_list.Size = new System.Drawing.Size(145, 673);
             this.plan_list.TabIndex = 0;
             // 
+            // notes_button
+            // 
+            this.notes_button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.notes_button.FlatAppearance.BorderSize = 0;
+            this.notes_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.notes_button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(255)))), ((int)(((byte)(204)))));
+            this.notes_button.Location = new System.Drawing.Point(0, 224);
+            this.notes_button.Margin = new System.Windows.Forms.Padding(4);
+            this.notes_button.Name = "notes_button";
+            this.notes_button.Size = new System.Drawing.Size(145, 29);
+            this.notes_button.TabIndex = 5;
+            this.notes_button.Text = "Notes";
+            this.notes_button.UseVisualStyleBackColor = false;
+            this.notes_button.Click += new System.EventHandler(this.panel_button_Click);
+            // 
             // board_button
             // 
             this.board_button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.board_button.FlatAppearance.BorderSize = 0;
             this.board_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.board_button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(255)))), ((int)(((byte)(204)))));
-            this.board_button.Location = new System.Drawing.Point(0, 189);
+            this.board_button.Location = new System.Drawing.Point(0, 188);
             this.board_button.Margin = new System.Windows.Forms.Padding(4);
             this.board_button.Name = "board_button";
             this.board_button.Size = new System.Drawing.Size(145, 29);
@@ -94,7 +111,7 @@
             this.week_button.FlatAppearance.BorderSize = 0;
             this.week_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.week_button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(255)))), ((int)(((byte)(204)))));
-            this.week_button.Location = new System.Drawing.Point(-4, 152);
+            this.week_button.Location = new System.Drawing.Point(0, 152);
             this.week_button.Margin = new System.Windows.Forms.Padding(4);
             this.week_button.Name = "week_button";
             this.week_button.Size = new System.Drawing.Size(149, 29);
@@ -221,6 +238,7 @@
         private System.Windows.Forms.TextBox add_txt_long;
         private System.Windows.Forms.Panel long_panel;
         private System.Windows.Forms.Button board_button;
+        private System.Windows.Forms.Button notes_button;
     }
 }
 

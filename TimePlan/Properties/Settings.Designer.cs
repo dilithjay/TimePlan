@@ -58,5 +58,17 @@ namespace TimePlan.Properties {
                 this["temp_long"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string notes {
+            get {
+                return ((string)(this["notes"]));
+            }
+            set {
+                this["notes"] = value;
+            }
+        }
     }
 }
